@@ -1,0 +1,33 @@
+String quitarTildes(String texto) {
+  const conTilde = 'áéíóúÁÉÍÓÚüÜñÑ';
+  const sinTilde = 'aeiouAEIOUuUnN';
+
+  for (int i = 0; i < conTilde.length; i++) {
+    texto = texto.replaceAll(conTilde[i], sinTilde[i]);
+  }
+  return texto;
+}
+
+bool esPalindromo(String texto) {
+  String limpio = quitarTildes(
+    texto,
+  ).toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+
+  String reverso = limpio.split('').reversed.join('');
+  return limpio == reverso;
+}
+
+void main() {
+  List<String> frases = [
+    "Isaac no ronca así",
+    "Hola mundo",
+    "Yo hago yoga hoy",
+    "Mañana tengo clases",
+    "A ti no, bonita",
+    "Hoy por mi , mañana por ti"
+  ];
+
+  for (var frase in frases) {
+    print('"$frase" → ${esPalindromo(frase)}');
+  }
+}
